@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Masai Doctor Records</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <!-- Use this form for data input  -->
+    <form>
+      <label for="">Doctor Name</label>
+      <input placeholder="Name" type="text" id="name" />
+      <label for="">Doctor ID</label>
+      <input placeholder="Doctor ID" type="text" id="doctor_id" />
+      <label for="">Specialization</label>
+      <select id="specialization">
+        <option value="">Select Specialization</option>
+        <option value="Dermatologist">Dermatologist</option>
+        <option value="Dentist">Dentist</option>
+        <option value="Gynecologist">Gynecologist</option>
+      </select>
+      <label for="">Experiance</label>
+      <input placeholder="Experience" type="number" id="experience" />
+      <label for="">Email Address</label>
+      <input placeholder="Email" type="email" id="email" />
+      <label for="">Mobile Number</label>
+      <input placeholder="Mobile No." type="number" id="mobile" />
+      <label for="">Role</label>
+      <select name="" id="role">
+        <option value="">Select Role</option>
+        <option value="Senior">Senior</option>
+        <option value="junior">junior</option>
+        <option value="Trainee">Trainee</option>
+      </select>
+      <input type="submit" value="Submit"  />
+    </form>
+
+    <!-- Use this Select tag for filter part  -->
+    <!-- <select id="filter">
+      <option value="">Select Specialization</option>
+      <option value="Dermatologist">Dermatologist</option>
+      <option value="Dentist">Dentist</option>
+      <option value="Gynecologist">Gynecologist</option>
+    </select> -->
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Doctor ID</th>
+          <th>Specialization</th>
+          <th>Experience in Years</th>
+          <th>Email</th>
+          <th>Mobile No</th>
+          <th>Role</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Append Rows here using JS & DOM  -->
+      </tbody>
+    </table>
+  </body>
+  
+  <script>
+       let myForm = document.querySelector("form");
+  let Doctor = document.getElementById("name");
+  let DoctorID = document.getElementById("doctor_id");
+  let specialization = document.getElementById("specialization");
+  let experience = document.getElementById("experience");
+  let emailAddress = document.getElementById("email");
+  let mobileNumber = document.getElementById("mobile");
+  let role = document.getElementById("role");
+  let tbody = document.querySelector("tbody");
+  let AllData = [];
+
+  myForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    let Data = {};
+    Data.Doctor = Doctor.value;
+    Data.DoctorID = DoctorID.value;
+    Data.specialization = specialization.value;
+    Data.experience = experience.value;
+    Data.emailAddress = emailAddress.value;
+    Data.mobileNumber = mobileNumber.value;
+    Data.role = role.value;
+
+    AllData.push(Data);
+
+    tbody.innerHTML = null;
+
+    AllData.map((element, index) => {
+      let row = document.createElement("tr");
+      let td1 = document.createElement("td");
+      let td2 = document.createElement("td");
+      let td3 = document.createElement("td");
+      let td4 = document.createElement("td");
+      let td5 = document.createElement("td");
+      let td6 = document.createElement("td");
+      let td7 = document.createElement("td");
+      let td8 = document.createElement("td");
+      let deleteBtn = document.createElement("button");
+
+      td1.innerText = element.Doctor;
+      td2.innerText = element.DoctorID;
+      td3.innerText = element.specialization;
+      td4.innerText = element.experience;
+      td5.innerText = element.emailAddress;
+      td6.innerText = element.mobileNumber;
+      td7.innerText = element.role;
+      td8.innerText = "Delete";
+
+      deleteBtn.innerText = "Delete";
+      deleteBtn.addEventListener("click", () => {
+        AllData.splice(index, 1);
+        tbody.removeChild(row);
+      });
+
+      row.append(td1, td2, td3, td4, td5, td6, td7, td8, deleteBtn);
+      tbody.append(row);
+    });
+
+    Doctor.value = '';
+    DoctorID.value = '';
+    specialization.value = '';
+    experience.value = '';
+    emailAddress.value = '';
+    mobileNumber.value = '';
+    role.value = '';
+  });
+
+  </script>
+</html>
